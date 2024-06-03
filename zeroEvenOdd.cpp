@@ -1,3 +1,11 @@
+// =========================================================
+// File: zeroEvenOdd.cpp
+// Author: Sebastián Colín
+// Date: 02/06/2024
+// Description: This file proposes a solution to the 
+// zero even odd problem, using threads and mutex locks. 
+// =========================================================
+
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -10,22 +18,28 @@ using namespace std;
 
 // Struct that holds state temp information before printing
 struct stateCheck {
-    /*
-        n = max number to be printed 
-        current = the current number to be printed
-        zeroTurn = indicates when it's the turn for a zero to be printed
-        m1 = mutex lock to protect data that is shared across threads
-        cv = conditional variable to ensure thread synchronization
-    */
-    int n;  
-    int current;
-    bool zeroTurn;
-    mutex m1;
-    condition_variable cv;
-    stringstream check;
+   
+    int n;  // max number to be printed 
+
+    int current; // the current number to be printed
+
+    bool zeroTurn;  // indicates when it's the turn for a zero to be printed
+
+    mutex m1; // mutex lock to protect data that is shared across threads
+
+    condition_variable cv; // conditional variable to ensure thread synchronization
+
+    stringstream check; // adds all numbers to a stringstream for answer comparison
+
 };
 
-// Function to check and print for zero
+/**
+ * Determines if it's the turn of a zero
+ * to be printed
+ * 
+ * @param state: a state object (struct) with values of curr state, function: to print numbers
+ * @return n/A
+*/
 void zero(stateCheck* state, function<void(int)> printNumber) {
     for (int i = 0; i < state->n; ++i) {
         unique_lock<mutex> lock(state->m1);
@@ -37,7 +51,13 @@ void zero(stateCheck* state, function<void(int)> printNumber) {
     }
 }
 
-// Function to check and print for even numbers
+/**
+ * Determines if it's the turn of an even number
+ * to be printed
+ * 
+ * @param state: a state object (struct) with values of curr state, function: to print numbers
+ * @return n/A
+*/
 void even(stateCheck* state, function<void(int)> printNumber) {
     for (int i = 2; i <= state->n; i += 2) {
         unique_lock<mutex> lock(state->m1);
@@ -49,7 +69,13 @@ void even(stateCheck* state, function<void(int)> printNumber) {
     }
 }
 
-// Function to check and print for odd numbers
+/**
+ * Determines if it's the turn of an odd number
+ * to be printed
+ * 
+ * @param state: a state object (struct) with values of curr state, function: to print numbers
+ * @return n/A
+*/
 void odd(stateCheck* state, function<void(int)> printNumber) {
     for (int i = 1; i <= state->n; i += 2) {
         unique_lock<mutex> lock(state->m1);
@@ -61,11 +87,23 @@ void odd(stateCheck* state, function<void(int)> printNumber) {
     }
 }
 
-// Helper function to print a numbers
+/**
+ * Helper function to print numbers
+ * 
+ * @param int: the current number
+ * @return n/A
+*/
 void printNumber(int x) {
     cout << x;
 }
 
+
+/**
+ * main function to run the program
+ * 
+ * @param n/A
+ * @return n/A
+*/
 int main() {
 
     // Array for test values
@@ -80,10 +118,9 @@ int main() {
 
     string stringArr[] = {ans1, ans2, ans3, ans4, ans5};
 
-    // int n = 200;    // Max num to be printed
     for (int i = 0; i < sizeof(arr)/sizeof(arr[0]); i++) {
 
-        cout << "Initiating test " << (i + 1) << "\n";
+        cout << "Initiating test " << (i + 1) << ":\n";
 
         stateCheck state = {arr[i], 1, true};   // Initialize the shared state
 
