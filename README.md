@@ -140,8 +140,8 @@ The recursive call could look something like this:
     even(X) :- 0 is X mod 2.
 
     zeo(Curr, N) :-
-        write(0), write(' '),
-        (even(Curr) -> printEvenNumber(Curr); printOddNumber(Curr)), % this is our conditional
+        write(0),
+        (even(Curr) -> printEven(Curr); printOdd(Curr)), % this is our conditional
         Next is Curr + 1,
         zeo(Next, N).
 ```
