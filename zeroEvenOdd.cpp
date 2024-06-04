@@ -25,9 +25,9 @@ struct stateCheck {
 
     bool zeroTurn;  // indicates when it's the turn for a zero to be printed
 
-    mutex m1; // mutex lock to protect data that is shared across threads
+    std::mutex m1; // mutex lock to protect data that is shared across threads
 
-    condition_variable cv; // conditional variable to ensure thread synchronization
+    std::condition_variable cv; // conditional variable to ensure thread synchronization
 
     stringstream check; // adds all numbers to a stringstream for answer comparison
 
