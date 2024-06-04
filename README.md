@@ -130,9 +130,22 @@ The combination of these, evaluates to: `O(n) + O(n) + O(n) = O(n)`. So the fina
 
 **Other possible paradigms that could have been used**
 
-The clear other paradigm that this could have been solved with is with imperative programming. Giving the 
-computer detailed sequential steps on what to do to solve the problem. The advantage of this is that it is way 
-less complex and has better code readability, but it isn't as fast as a concurrent program can be. 
+Another paradigm that this could have been solved with is with the **logical paradigm**. For example wit Prolog we could define certain facts to describe the relationships and basic facts about the problem. In this case we can define how is a number even or odd, by calculating the modulo of a certain number divided by two. Then we could define certain rules to generate the sequence of printing for the numbers. 
 
+Using a recursive call we can reach a base case that is when the current number to be printed exceeds **n** our target number. We can also just create a single even or odd function, and if the condition evaluates to true, then call a function to print even, else we print odd. 
+
+The recursive call could look something like this: 
+
+```
+    even(X) :- 0 is X mod 2.
+
+    zeo(Curr, N) :-
+        write(0), write(' '),
+        (even(Curr) -> printEvenNumber(Curr); printOddNumber(Curr)), % this is our conditional
+        Next is Curr + 1,
+        zeo(Next, N).
+```
+
+Though this problem was better to be solved with concurrency to really exemplify the power of threads, and how each one can be assigned to one task, in this case to handle only zero, or only even or only odd numbers. Having a 'specialized' thread for each case makes it way faster. With the logical programming paradigm, the problem loses a bit of its original focus, and it just recurses to the next number, printing a zero before the former. 
 
 
