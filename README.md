@@ -31,7 +31,7 @@ are critical in high-performance applications such as web services or large-scal
 
 ### Models
 
-![Diagrama en blanco - Página 4(1)](https://github.com/SebastianCo1126/TC2037-Demonstration-of-a-programming-paradigm/assets/150994751/26dbdec2-2aa8-40ba-9fc4-5636774f74e4)
+![zeroEvenOdd_Diagram](https://github.com/SebastianCo1126/TC2037-Demonstration-of-a-programming-paradigm/blob/main/zeroEvenOdd_Diagram.png)
 
 ### Implementation
 
