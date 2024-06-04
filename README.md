@@ -149,3 +149,21 @@ The recursive call could look something like this:
 Though this problem was better to be solved with concurrency to really exemplify the power of threads, and how each one can be assigned to one task, in this case to handle only zero, or only even or only odd numbers. Having a 'specialized' thread for each case makes it way faster. With the logical programming paradigm, the problem loses a bit of its original focus, and it just recurses to the next number, printing a zero before the former. 
 
 
+**Theoretical/Mathematical backing**
+
+By using the concurrent programming paradigm multiple computations are made during overlapping time periods, doing instructions at the same time instead of sequentially. Synchronization mechanisms like a mutex lock and condition variables (implemented in this evidence) are used to ensure that threads access shared resources in a safe way. 
+
+For a global representation and abstraction of what is happing, I'll define: 
+
+- C -> current number to be printed
+- B -> **boolean** variable to indicate if it is zero's turn to be printed or not
+
+A simple sequence can be represented as a series of states transition: 
+
+- (C, true) -> (C, false) -> (C + 1, true)
+
+And current just evaluates to be even or odd. 
+
+
+
+
